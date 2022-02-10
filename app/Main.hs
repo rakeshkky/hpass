@@ -1,8 +1,6 @@
 module Main where
 
-import qualified MyLib (someFunc)
+import HPass
 
 main :: IO ()
-main = do
-  putStrLn "Hello, Haskell!"
-  MyLib.someFunc
+main = getCommand >>= runCommand
