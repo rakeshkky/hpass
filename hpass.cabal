@@ -43,10 +43,17 @@ library
     build-depends:    base ^>=4.14.3.0
                     , text
                     , optparse-applicative
+                    , aeson
+                    , wreq
+                    , http-types
+                    , lens
 
                     -- generate password
                     , elocrypt
                     , random
+
+                    -- file handling
+                    , directory
 
     hs-source-dirs:   src
     default-language: Haskell2010
