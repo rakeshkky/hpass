@@ -53,7 +53,8 @@ def graphql_query(query, variables):
         'query': query,
         'variables': variables
     }
-    res = requests.post(graphql_url, data = json.dumps(req))
+    headers = {"X-Hasura-Admin-Secret": "random"}
+    res = requests.post(graphql_url, headers=headers, data = json.dumps(req))
     return res.json()
 
 hash_salt = b'some_salt'
@@ -111,6 +112,7 @@ class Login(Resource):
 class Webhook(Resource):
 
     def get(self):
+        print(request.headers)
         bearer = request.headers.get('Authorization')
         tok = bearer.split()[1]
         token_res = graphql_query(fetch_session_query, {"session_token": tok})
@@ -119,7 +121,7 @@ class Webhook(Resource):
                 user_id = token_res['data']['session'][0]['user_id']
                 return {
                     'X-Hasura-Role': 'user',
-                    'X-Hasura-User-Id': user_id
+                    'X-Hasura-User-Id': str(user_id)
                 }
             else:
                 return {}, 401

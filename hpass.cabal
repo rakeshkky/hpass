@@ -30,6 +30,9 @@ common common-all
          LambdaCase
          ImportQualifiedPost
          RecordWildCards
+         FlexibleContexts
+         QuasiQuotes
+         ScopedTypeVariables
 
 library
     import: common-all
@@ -47,6 +50,11 @@ library
                     , wreq
                     , http-types
                     , lens
+                    , mtl
+                    , raw-strings-qq
+                    , unordered-containers
+                    , bytestring
+                    , lens-aeson
 
                     -- generate password
                     , elocrypt
